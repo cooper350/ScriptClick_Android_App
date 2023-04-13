@@ -1,0 +1,55 @@
+<resources xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Base application theme. -->
+    <style name="Theme.MainScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="searchViewStyle">@style/SearchViewBorders</item>
+    </style>
+
+    <!-- Define a separate style for BlueListView -->
+    <style name="BlueListView" parent="android:Widget.ListView">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:divider">#000000</item>
+        <item name="android:dividerHeight">2dp</item>
+        <item name="android:textAppearance">@style/ListItemTextLarge</item>
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="ListItemTextLarge">
+        <item name="android:textSize">72sp</item>
+    </style>
+
+
+    <style name="SearchViewBorders" parent="android:Widget.Material.SearchView">
+        <item name="android:background">@drawable/search_view_border</item>
+        <item name="queryBackground">@null</item>
+        <item name="android:queryHint">Search</item>
+        <item name="searchIcon">@drawable/ic_search</item>
+        <item name="closeIcon">@drawable/ic_close</item>
+        <item name="iconifiedByDefault">false</item>
+    </style>
+
+
+    <style name="Theme.MainScreen.NoActionBar" parent="Theme.MaterialComponents.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MainScreen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MainScreen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
+
+
+
