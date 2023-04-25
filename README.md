@@ -1,8 +1,1 @@
-# SciptClick_Main
-# SciptClick_Main
-# SciptClick_Main
-# SciptClick_Main
-# SciptClick_Main
-# SciptClick_Main
-# SciptClick_Main
-# SciptClick_Main
+# This is an Android app made with Android Studios using java as a senior project. The app is called ScriptClick and this prototype allows users to sign in a view a short script in several troupes and record lines.
