@@ -1,4 +1,4 @@
-package com.example.mainscreen.scriptclick.ui.login;
+package com.example.mainscreen;
 
 import androidx.annotation.Nullable;
 

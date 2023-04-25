@@ -1,17 +1,29 @@
-package com.example.mainscreen.scriptclick.ui.login;
+package com.example.mainscreen;
 
 /**
  * Class exposing authenticated user details to the UI.
  */
-class LoggedInUserView {
+public class LoggedInUserView {
     private String displayName;
-    //... other data fields that may be accessible to the UI
+    private String email; // Add an email field
 
-    LoggedInUserView(String displayName) {
+    public LoggedInUserView(String displayName) {
         this.displayName = displayName;
     }
 
-    String getDisplayName() {
+    // Add a new constructor that takes both display name and email as parameters
+    public LoggedInUserView(String displayName, String email) {
+        this.displayName = displayName;
+        this.email = email;
+    }
+
+    public String getDisplayName() {
         return displayName;
     }
+
+    // Add a getter method for the email field
+    public String getEmail() {
+        return email;
+    }
 }
+

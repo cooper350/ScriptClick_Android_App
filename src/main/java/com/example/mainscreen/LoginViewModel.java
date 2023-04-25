@@ -1,15 +1,10 @@
-package com.example.mainscreen.scriptclick.ui.login;
+package com.example.mainscreen;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
-
-import com.example.scriptclick.data.LoginRepository;
-import com.example.scriptclick.data.Result;
-import com.example.scriptclick.data.model.LoggedInUser;
-import com.example.scriptclick.R;
 
 public class LoginViewModel extends ViewModel {
 

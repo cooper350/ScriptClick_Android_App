@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/messageFragment">
+    app:startDestination="@id/loginFragment"
+    tools:ignore="ExtraText">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mainscreen.Login"
+        android:label="Login" >
+        <action
+            android:id="@+id/action_login_to_messageFragment"
+            app:destination="@id/messageFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/messageFragment"
@@ -11,22 +21,29 @@
         android:label="MessageFragment">
 
         <action
-            android:id="@+id/action_messageFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
+            android:id="@+id/action_messageFragment_to_script_page"
+            app:destination="@id/script_page"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.mainscreen.SecondFragment"
-        android:label="SecondFragment">
+        android:id="@+id/script_page"
+        android:name="com.example.mainscreen.Script_Page"
+        android:label="Script_Page">
 
         <action
-            android:id="@+id/action_secondFragment_to_messageFragment"
-            app:destination="@id/messageFragment" />
+            android:id="@+id/action_script_page_to_messageFragment"
+            app:destination="@id/messageFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
     </fragment>
 
 </navigation>
-
 

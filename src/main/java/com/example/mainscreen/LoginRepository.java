@@ -1,6 +1,4 @@
-package com.example.mainscreen.scriptclick.data;
-
-import com.example.scriptclick.data.model.LoggedInUser;
+package com.example.mainscreen;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -13,7 +11,7 @@ public class LoginRepository {
     private LoginDataSource dataSource;
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
-    // @see https://developer.android.com/training/articles/keystore
+    // @see <a href="https://developer.android.com/training/articles/keystore">https://developer.android.com/training/articles/keystore</a>
     private LoggedInUser user = null;
 
     // private constructor : singleton access
@@ -37,7 +35,11 @@ public class LoginRepository {
         dataSource.logout();
     }
 
-    private void setLoggedInUser(LoggedInUser user) {
+    public LoggedInUser getLoggedInUser() {
+        return user;
+    }
+
+    public void setLoggedInUser(LoggedInUser user) {
         this.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
@@ -52,3 +54,4 @@ public class LoginRepository {
         return result;
     }
 }
+

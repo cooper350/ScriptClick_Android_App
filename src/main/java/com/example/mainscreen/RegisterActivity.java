@@ -1,4 +1,4 @@
-package com.example.mainscreen.scriptclick.ui.login;
+package com.example.mainscreen;
 
 import android.app.Activity;
 
@@ -22,16 +22,20 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
-import com.example.scriptclick.R;
-import com.example.scriptclick.ui.login.LoginViewModel;
-import com.example.scriptclick.ui.login.LoginViewModelFactory;
-import com.example.scriptclick.databinding.ActivityRegisterBinding;
+import com.example.mainscreen.databinding.ActivityRegisterBinding;
 
 public class RegisterActivity extends AppCompatActivity {
-
     private LoginViewModel loginViewModel;
     private @NonNull ActivityRegisterBinding binding;
+
+    // Add these variables for Firebase Authentication
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
@@ -48,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final Button registerButton = binding.register;
-        final ProgressBar loadingProgressBar = binding.loading;
+        final ProgressBar loadingProgressBar = binding.loadingProgressBar;
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -63,6 +70,17 @@ public class RegisterActivity extends AppCompatActivity {
                 if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
                 }
+            }
+        });
+
+        final Button backButton = binding.backButton;
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -121,16 +139,64 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                String email = usernameEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+                String firstName = firstnameEditText.getText().toString().trim();
+                String lastName = lastnameEditText.getText().toString().trim();
+
+                registerUser(email, password, firstName, lastName);
             }
         });
     }
+
+    private void registerUser(String email, String password, String firstName, String lastName) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign up success, update UI with the user's information
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(firstName + " " + lastName)
+                                .build();
+                        if (user != null) {
+                            user.updateProfile(profileUpdates).addOnCompleteListener(profileUpdateTask -> {
+                                if (profileUpdateTask.isSuccessful()) {
+                                    // Send verification email
+                                    user.sendEmailVerification()
+                                            .addOnCompleteListener(emailVerificationTask -> {
+                                                if (emailVerificationTask.isSuccessful()) {
+                                                    Toast.makeText(RegisterActivity.this, "Verification email sent to " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(RegisterActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                    // Show a message to the user asking them to check their email for verification
+                                    Toast.makeText(getApplicationContext(), "Registration successful. Please check your email for verification.", Toast.LENGTH_LONG).show();
+
+                                    // Navigate back to LoginActivity
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    showLoginFailed(R.string.register_failed);
+                                }
+                            });
+                        }
+                    } else {
+                        showLoginFailed(R.string.register_failed);
+                    }
+                });
+    }
+
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

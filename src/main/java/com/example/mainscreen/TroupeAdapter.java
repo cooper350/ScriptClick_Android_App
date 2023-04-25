@@ -1,22 +1,27 @@
 package com.example.mainscreen;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import java.util.List;
+import android.widget.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
-import android.util.TypedValue;
 import android.graphics.Typeface;
+import android.util.TypedValue;
+import java.util.ArrayList;
 
 
 public class TroupeAdapter extends ArrayAdapter<String> {
 
-    private List<String> mTroupes;
+    private ArrayList<String> mTroupes;
 
-    public TroupeAdapter(Context context, List<String> troupes) {
+    public TroupeAdapter(Context context, ArrayList<String> troupes) {
         super(context, R.layout.list_item, troupes);
         mTroupes = troupes;
     }
@@ -52,5 +57,7 @@ public class TroupeAdapter extends ArrayAdapter<String> {
         return convertView;
     }
 }
+
+
 
 

@@ -1,4 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -6,17 +8,72 @@
     android:background="@android:color/white">
 
     <TextView
-        android:id="@+id/edit_script"
+        android:id="@+id/annotations_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Script"
+        android:text="Highlight"
         android:padding="8dp" />
 
     <TextView
-        android:id="@+id/delete_script"
+        android:id="@+id/act_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Script"
+        android:text="Act Search(IN PROGRESS)"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/scene_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scene Search(IN PROGRESS)"
+        android:padding="8dp" />
+
+    <LinearLayout
+        android:id="@+id/font_size_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Font Size" />
+
+        <SeekBar
+            android:id="@+id/font_size_seekbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:max="100"
+            android:progress="50" />
+
+        <TextView
+            android:id="@+id/font_size_value_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50"
+            android:padding="8dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:id="@+id/font_size_display"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/annotation_color_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Text Color"
         android:padding="8dp" />
 
 </LinearLayout>
+</layout>
+

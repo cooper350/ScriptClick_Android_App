@@ -1,11 +1,8 @@
-package com.example.mainscreen.scriptclick.ui.login;
+package com.example.mainscreen;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
-
-import com.example.scriptclick.data.LoginDataSource;
-import com.example.scriptclick.data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

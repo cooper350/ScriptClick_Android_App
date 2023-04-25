@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<TextView
     android:id="@android:id/text1"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
@@ -7,4 +9,6 @@
     android:layout_height="98dp"
     android:textSize="32sp"
     android:textColor="#000000"
-    android:textStyle="bold" />
+    android:textStyle="bold"
+    android:background="@color/lightYellow"/>
+</layout>
